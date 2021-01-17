@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Public Class Form1
-    Dim tD() As Decimal = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} ' The size of the files will be stored in this array
+    Dim tD() As Decimal = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} ' The size of the files will be stored in this array
     Public Sub reorder(ByRef e As String, ByRef fR As String, ByRef fN As String)
         Dim tF = 0
         Dim errorCounter = 0
@@ -431,6 +431,25 @@ Public Class Form1
                     tF += 1
                 End If
 
+                If e = ".pkf" Then
+                    Dim informationFile As System.IO.FileInfo
+                    informationFile = My.Computer.FileSystem.GetFileInfo(item)
+                    Dim size As Decimal = informationFile.Length / 2 ^ 20
+                    '| SALVATAGGIO INFORMAZIONI NELL'ARRAY |
+                    tD(19) += size
+                    TextBox3.Text += $"Transferring {Path.GetFileName(item)} size: " + Math.Round(size, 2).ToString + " MB" + vbCrLf
+                    TextBox4.Text += $"Transferring {Path.GetFileName(item)} size: " + Math.Round(size, 2).ToString + " MB" + vbCrLf
+                    Dim newPath As String = percorsDirectory + "\Audition files\"
+                    publicpath = newPath
+                    If Directory.Exists(newPath) = False Then
+                        Directory.CreateDirectory(newPath)
+                        File.Move(item, newPath + Path.GetFileName(item))
+                    Else
+                        File.Move(item, newPath + Path.GetFileName(item))
+                    End If
+                    tF += 1
+                End If
+
             Catch Lol As IOException ' | duplicate |
 
                 Try
@@ -459,7 +478,7 @@ Public Class Form1
             'FILE EXE
         Next
 
-        '| LET'S PRINT THE RESOCONTOOOSSSS |
+        '| LET'S PRINT THE REPORTS |
 
 
 
@@ -754,6 +773,23 @@ Public Class Form1
                     TextBox4.Text += $"Total transferred Jonio Player Playlist files size: {Math.Round(dime, 2).ToString} MB" + vbCrLf
                 End If
             End If
+
+            If tD(19) <> 0 Then
+                Dim dime As Decimal = tD(18)
+                If dime >= 1024 Then
+                    dime = dime / 1024
+                    TextBox3.Text += $"Total transferred Audition files size: {Math.Round(dime, 2).ToString} GB" + vbCrLf
+                    TextBox4.Text += $"Total transferred Audition files size: {Math.Round(dime, 2).ToString} GB" + vbCrLf
+                ElseIf dime < 1 Then
+                    dime = dime * 1024
+                    TextBox3.Text += $"Total transferred Audition files size: {Math.Round(dime, 2).ToString} KB" + vbCrLf
+                    TextBox4.Text += $"Total transferred Audition files size: {Math.Round(dime, 2).ToString} KB" + vbCrLf
+                Else
+                    TextBox3.Text += $"Total transferred Audition files size: {Math.Round(dime, 2).ToString} MB" + vbCrLf
+                    TextBox4.Text += $"Total transferred Audition files size: {Math.Round(dime, 2).ToString} MB" + vbCrLf
+                End If
+            End If
+
         End If
         If tF = 0 And errorCounter = 0 Then
 
