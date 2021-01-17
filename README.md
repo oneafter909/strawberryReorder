@@ -34,3 +34,6 @@ You have to enter two dates, the exstension and the directory to reorder. The pr
   <li>Blend: .blend. </li>
   <li>Audition Files .pkf </li>
 </ul>
+
+<b>How to compile it</b>
+You have to compile it with Visual Studio. Press F5 to compile.
