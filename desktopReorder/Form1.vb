@@ -1097,7 +1097,7 @@ Public Class Form1
         End Select
         Dim dimensioni() As Long = {0}
         For Each item In Directory.GetFiles(p)
-            If File.GetCreationTime(item) >= dataIniziale And File.GetCreationTime(item) <= dataFinale And Path.GetExtension(item) = ComboBox5.Text Then
+            If File.GetLastWriteTime(item) >= dataIniziale And File.GetLastWriteTime(item) <= dataFinale And Path.GetExtension(item).ToLower() = ComboBox5.Text Then
                 Dim foldername As String = ""
                 If CheckBox1.Checked = True Then
                     foldername = $"Files from {dataIniziale.Day.ToString} {mese} {dataIniziale.Year.ToString} to {dataFinale.Day.ToString} {mesef} {dataFinale.Year.ToString} ({Path.GetExtension(item)})"
@@ -1128,7 +1128,7 @@ Public Class Form1
                     errorCounter += 1
                     TextBox7.Text += $"Error with the file  {Path.GetFileName(item)}" + vbCrLf + "E:" + ex.Message + vbCrLf
                 End Try
-            ElseIf ComboBox5.Text = ".*" And File.GetCreationTime(item) >= dataIniziale And File.GetCreationTime(item) <= dataFinale Then                                       '.* Transfer ALL files
+            ElseIf ComboBox5.Text = ".*" And File.GetLastWriteTime(item) >= dataIniziale And File.GetLastWriteTime(item) <= dataFinale Then                                       '.* Transfer ALL files
                 Dim foldername As String = ""
                 If CheckBox1.Checked = True Then
                     foldername = $"Files from {dataIniziale.Day.ToString} {mese} {dataIniziale.Year.ToString} to {dataFinale.Day.ToString} {mesef} {dataFinale.Year.ToString}"
