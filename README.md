@@ -1,5 +1,5 @@
-# Jonio Strawberry Reorder
-A powerful file reorder for Windows.
+# File Sorter
+A powerful file sorter for Windows.
 
 <b>What does Strawberry?</b></br>
 Strawberry Reorder will move all your files inside a new folder depending on mode.
