@@ -1,4 +1,4 @@
-# File Sorter
+# Strawberry File Sorter
 A powerful file sorter for Windows.
 
 <b>What does Strawberry?</b></br>
